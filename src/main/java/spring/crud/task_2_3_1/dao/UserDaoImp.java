@@ -1,5 +1,6 @@
 package spring.crud.task_2_3_1.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import spring.crud.task_2_3_1.model.User;
 
@@ -11,19 +12,18 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
+    @Autowired
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager entityManager;
 
     @Override
     public void saveUser(User user) {
-        entityManager.getTransaction().begin();
         entityManager.persist(user);
-        entityManager.getTransaction().commit();
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 
     @Override

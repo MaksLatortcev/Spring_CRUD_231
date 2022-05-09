@@ -30,7 +30,7 @@ import java.util.Properties;
 @PropertySource("classpath:db.properties")
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("spring")
+@ComponentScan("spring.crud.task_2_3_1")
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -75,7 +75,7 @@ public class WebConfig implements WebMvcConfigurer {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        em.setPackagesToScan(new String[]{"com.baeldung.persistence.model"});
+        em.setPackagesToScan(new String[]{"spring.crud.task_2_3_1.model"});
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -106,7 +106,6 @@ public class WebConfig implements WebMvcConfigurer {
     Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         return properties;
     }
