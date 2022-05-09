@@ -4,26 +4,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import spring.crud.task_2_3_1.model.User;
 import spring.crud.task_2_3_1.service.UserService;
-import spring.crud.task_2_3_1.service.UserServiceImp;
 
 
 @Controller
-public class UserController{
+public class UserController {
 
     @Autowired
     private UserService userService;
 
-//    public String newCustomerForm(Map<String, Object> model) {
-//        Customer customer = new Customer();
-//        model.put("customer", customer);
-//        return "new_customer";
-//    }
-
     @GetMapping("/new")
-    public String saveUser(User user) {
+    public String newUserForm(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
         return "new_user";
+    }
+
+    @PostMapping("/save")
+    public String saveUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/";
     }
 
     @GetMapping("/")
