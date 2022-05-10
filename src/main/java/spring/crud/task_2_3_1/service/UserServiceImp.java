@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring.crud.task_2_3_1.dao.UserDao;
-import spring.crud.task_2_3_1.dao.UserDaoImp;
 import spring.crud.task_2_3_1.model.User;
 
 import java.util.List;
@@ -30,19 +29,19 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public User getUserById(String id) {
+    public User getUserById(long id) {
         return userDao.getUserById(id);
     }
 
     @Override
     @Transactional
-    public void updateUser(String id) {
-        userDao.updateUser(id);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
     @Override
     @Transactional
-    public void deleteUser(String id) {
+    public void deleteUser(long id) {
         userDao.deleteUser(id);
     }
 }

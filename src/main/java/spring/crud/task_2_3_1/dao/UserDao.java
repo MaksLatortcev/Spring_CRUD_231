@@ -11,9 +11,9 @@ public interface UserDao {
 
     List<User> getAllUsers();
 
-    User getUserById(String id);
+    User getUserById(long id);
 
-    void updateUser(String id);
+    void updateUser(User user);
 
-    void deleteUser(String id);
+    void deleteUser(long id);
 }

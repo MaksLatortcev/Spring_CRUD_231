@@ -1,9 +1,9 @@
 package spring.crud.task_2_3_1.service;
 
-
 import spring.crud.task_2_3_1.model.User;
 
 import java.util.List;
+
 
 public interface UserService {
 
@@ -11,10 +11,10 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    User getUserById(String id);
+    User getUserById(long id);
 
-    void updateUser(String id);
+    void updateUser(User user);
 
-    void deleteUser(String id);
+    void deleteUser(long id);
 
 }

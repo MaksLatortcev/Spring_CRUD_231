@@ -2,6 +2,7 @@ package spring.crud.task_2_3_1.model;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "users")
 public class User {

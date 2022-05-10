@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import spring.crud.task_2_3_1.model.User;
 import spring.crud.task_2_3_1.service.UserService;
 
@@ -23,9 +25,29 @@ public class UserController {
         return "new_user";
     }
 
+    @GetMapping("/edit")
+    public ModelAndView editUserForm(@RequestParam long id) {
+        ModelAndView mav = new ModelAndView("edit_user");
+        User user = userService.getUserById(id);
+        mav.addObject("user", user);
+        return mav;
+    }
+
     @PostMapping("/save")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
+        return "redirect:/";
+    }
+
+    @PostMapping("/edit")
+    public String editUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String deleteUserForm(@RequestParam long id) {
+        userService.deleteUser(id);
         return "redirect:/";
     }
 
@@ -33,20 +55,5 @@ public class UserController {
     public String getAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
-    }
-
-
-    public String getUserById(String id) {
-        return null;
-    }
-
-
-    public String updateUser(String id) {
-        return null;
-    }
-
-
-    public String deleteUser(String id) {
-        return null;
     }
 }
